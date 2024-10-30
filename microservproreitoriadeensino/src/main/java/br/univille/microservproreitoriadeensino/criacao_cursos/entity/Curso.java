@@ -2,24 +2,34 @@ package br.univille.microservproreitoriadeensino.criacao_cursos.entity;
 
 import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
+
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.GeneratedValue;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
+
+@Container(containerName = "curso", autoCreateContainer = true)
 public class Curso {
-    private UUID idCurso;
+    @Id
+    @PartitionKey
+    @GeneratedValue
+    private String idCurso;
     private String nomeCurso;
     private String periodo;
     private Disciplina disciplina;
 
-    public Curso(UUID idCurso, String nomeCurso, String periodo, Disciplina disciplina) {
+    public Curso(String idCurso, String nomeCurso, String periodo, Disciplina disciplina) {
         this.idCurso = idCurso;
         this.nomeCurso = nomeCurso;
         this.periodo = periodo;
         this.disciplina = disciplina;
     }
 
-    public UUID getIdCurso() {
+    public String getIdCurso() {
         return idCurso;
     }
 
-    public void setIdCurso(UUID idCurso) {
+    public void setIdCurso(String idCurso) {
         this.idCurso = idCurso;
     }
 
