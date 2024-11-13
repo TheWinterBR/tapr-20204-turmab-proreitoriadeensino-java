@@ -30,4 +30,27 @@ public class CursoServiceImpl
     public Curso save(Curso curso) {
         return repository.save(curso);
     }
+
+    @Override
+    public Curso update(String id, Curso curso) {
+       var buscaCursoAntigo = repository.findById(id);
+       if(buscaCursoAntigo.isPresent()){
+        var cursoAntigo = buscaCursoAntigo.get();
+        cursoAntigo.setNomeCurso(curso.getNomeCurso());
+        repository.save(cursoAntigo);
+        return cursoAntigo;
+       }
+       return null;
+    }
+
+    @Override
+    public Curso delete(String id) {
+        var buscaCursoAntigo = repository.findById(id);
+        if(buscaCursoAntigo.isPresent()){
+            var cursoAntigo = buscaCursoAntigo.get();
+            repository.delete(cursoAntigo);
+            return cursoAntigo;
+    }
+    return null;
+}
 }

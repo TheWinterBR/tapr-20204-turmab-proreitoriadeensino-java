@@ -8,5 +8,7 @@ public interface CursoService {
     
     List<Curso> getAll();
     Curso save(Curso curso);
+    Curso update (String id, Curso curso);
+    Curso delete (String id);
 
 }
