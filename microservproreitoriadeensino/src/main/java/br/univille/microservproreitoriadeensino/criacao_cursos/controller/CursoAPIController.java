@@ -3,6 +3,7 @@ package br.univille.microservproreitoriadeensino.criacao_cursos.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,4 +51,18 @@ public class CursoAPIController {
         }
         return new ResponseEntity<Curso>(curso, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Curso> 
+        delete(@PathVariable("id") String id){
+        if(id == "" || id == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        var curso = service.delete(id);
+        if(curso != null){
+            return new ResponseEntity<Curso>(curso, HttpStatus.OK);
+        }
+        return new ResponseEntity<Curso>(curso, HttpStatus.NOT_FOUND);
+    }
+
 }
